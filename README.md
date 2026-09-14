@@ -1,3 +1,1 @@
-My blog
-
-This is my blog. Contains technical stuff specifically related to the technology I'm working on.
+A professional portfolio and technical engineering log built with [Jekyll](https://jekyllrb.com/) and the [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy)theme.
