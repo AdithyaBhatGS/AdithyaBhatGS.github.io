@@ -37,7 +37,7 @@ Here is a technical overview breaking down what you manage versus what AWS manag
 
 | Sl No | Options |
 | ----- | ------- |
-| 1.    | [Raw Server](#traditional-server-virtual-machineon-prem) |
+| 1.    | [Raw Server](#traditional-server-virtual-machine-on-prem) |
 | 2.    | EC2   |
 | 3.    | Docker on EC2 |
 | 4.    | Docker + ECS on EC2    |
