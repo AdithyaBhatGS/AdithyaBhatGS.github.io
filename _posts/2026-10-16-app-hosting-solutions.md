@@ -4,6 +4,8 @@ title: "From Raw servers to ECS Fargate: The Evolution of Cloud Compute Choices"
 date: 2026-10-16
 categories: [Cloud Computing, App Hosting]
 tags: [aws, ec2, ecs, fargate, docker, app hosting]
+pin: false
+math: false
 mermaid: true
 ---
 
