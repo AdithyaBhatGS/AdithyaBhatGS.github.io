@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: post
 title: "From Raw servers to ECS Fargate: The Evolution of Cloud Compute Choices"
 date: 2026-10-16
 categories: [Cloud Computing, App Hosting]
