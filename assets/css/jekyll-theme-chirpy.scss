@@ -1,8 +1,13 @@
 ---
 ---
-@use 'abstracts/variables' with ( $theme: '{{ site.theme_mode }}' );
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
 
 /* prettier-ignore */
-@use 'main' {%- if jekyll.environment == 'production' -%}
+@use 'main
+{%- if jekyll.environment == 'production' -%}
   .bundle
-{%- endif -%};
+{%- endif -%}
+';
