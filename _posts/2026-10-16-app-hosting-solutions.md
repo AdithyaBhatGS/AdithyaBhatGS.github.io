@@ -38,10 +38,10 @@ Here is a technical overview breaking down what you manage versus what AWS manag
 | Sl No | Options |
 | ----- | ------- |
 | 1.    | [Raw Server](#traditional-server-virtual-machineon-prem) |
-| 2.    | [EC2]()   |
+| 2.    | EC2   |
 | 3.    | Docker on EC2 |
 | 4.    | Docker + ECS on EC2    |
-| 5.    | Docker + ECS on Fargate(serverless) |
+| 5.    | Docker + ECS on Fargate (serverless) |
 
 ### Traditional Server, Virtual Machine (On-prem)
 
@@ -51,7 +51,7 @@ Here is a technical overview breaking down what you manage versus what AWS manag
 
 | Advantage | Disadvantage |
 | --------- | ------------ |
-| Absolute control over physical and virutal layers of the machine. | High upfront cost(CAPEX). |
-| Data resides in your own data center. | Hardware maintenance(disk failures, power issues, server issues), |
-| | Scaling manually will be slow and difficult(You need to buy new servers or increase existing server configuration). |
+| Absolute control over physical and virutal layers of the machine. | High upfront cost (CAPEX). |
+| Data resides in your own data center. | Hardware maintenance (disk failures, power issues, server issues). |
+| | Scaling manually will be slow and difficult (You need to buy new servers or increase existing server configuration). |
 ---
