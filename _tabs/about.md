@@ -9,7 +9,7 @@ order: 4
 
 I'm Adithya Bhat GS. I am software engineer focussed on AWS, Cloud Infrastructure, designing custom solutions and architecture on cloud.
 
-I document my engineering contemplations and technical deep dives here.
+I document my engineering logs and technical deep dives here.
 
 ---
 
