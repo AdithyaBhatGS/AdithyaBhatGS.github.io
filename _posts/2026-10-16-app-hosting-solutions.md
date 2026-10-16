@@ -43,7 +43,7 @@ Here is a technical overview breaking down what you manage versus what AWS manag
 | 4.    | Docker + ECS on EC2    |
 | 5.    | Docker + ECS on Fargate(serverless) |
 
-### Traditional Server, Virtual Machine(On-prem)
+### Traditional Server, Virtual Machine (On-prem)
 
 **What you manage**: Physical hardware, data center space, power & cooling, OS installation, network switches, OS patching, security, uptime, app uptime, manual scaling.
 
