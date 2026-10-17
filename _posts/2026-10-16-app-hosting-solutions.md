@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "From Raw servers to ECS Fargate: The Evolution of Cloud Compute Choices"
+title: "From Raw Servers to ECS Fargate: The Evolution of Cloud Compute Choices"
 date: 2026-10-16
 categories: [Cloud Computing, App Hosting]
 tags: [aws, ec2, ecs, fargate, docker, app hosting]
@@ -24,9 +24,9 @@ mermaid: true
 
 ```mermaid
 graph TD
-    A[Traditional Server / Raw EC2] -->|Add Containers| B[Docker on EC2]
-    B[Docker on EC2] -->|Add Orchestrator & Scheduling| C[ECS on EC2]
-    C[ECS on EC2] -->|Remove Server Management| D[ECS Fargate]
+    A[Traditional Server / Raw EC2] -->|Add Containers| B[Docker on EC2]
+    B[Docker on EC2] -->|Add Orchestrator & Scheduling| C[ECS on EC2]
+    C[ECS on EC2] -->|Remove Server Management| D[ECS Fargate]
 ```
 
 ---
@@ -39,11 +39,11 @@ Here is a technical overview breaking down what you manage versus what AWS manag
 
 | Sl No | Options |
 | ----- | ------- |
-| 1.    | [Raw Server](#traditional-server-virtual-machine-on-prem) |
-| 2.    | [EC2](#ec2amazon-elastic-compute-cloud)   |
-| 3.    | [Docker on EC2](#docker-on-ec2) |
-| 4.    | [Docker + ECS on EC2](#docker--ecs-on-ec2)    |
-| 5.    | [Docker + ECS on Fargate (serverless) ](#docker--ecs-on-fargate-serverless) |
+| 1.    | [Raw Server](#traditional-server-virtual-machine-on-prem) |
+| 2.    | [EC2](#ec2amazon-elastic-compute-cloud)   |
+| 3.    | [Docker on EC2](#docker-on-ec2) |
+| 4.    | [Docker + ECS on EC2](#docker--ecs-on-ec2)    |
+| 5.    | [Docker + ECS on Fargate (serverless) ](#docker--ecs-on-fargate-serverless) |
 
 ### Traditional Server, Virtual Machine (On-prem)
 
@@ -98,8 +98,8 @@ Here is a technical overview breaking down what you manage versus what AWS manag
 
 | Advantage | Disadvantage |
 | --------- | ------------ |
-| Zero Server Management | Less low-level access(cannot SSH into the server to debuge issues) |
-| Good for unpredictable workloads | |
+| Zero Server Management. | Less low-level access (cannot SSH into the server to debug issues). |
+| Good for unpredictable workloads. | |
 ---
 
 ## Final Note
@@ -108,5 +108,7 @@ The respective *log* depicts the evolution of hosting the *app* on the server in
 
 Every choice comes with its own set of advantages and disadvantages. One should choose the right solution based on their requirements.
 
-Hope you find this meaningful,
+Hope you find this meaningful,\
 Thank you 🙂...
+
+---
