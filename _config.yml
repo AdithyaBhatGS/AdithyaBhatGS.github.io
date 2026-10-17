@@ -16,7 +16,7 @@ timezone:
 
 title: Adithya Bhat G S # the main title
 
-tagline: Contemplations of a Software Engineer # it will display as the subtitle
+tagline: Engineering Log # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   A personal portfolio and blog site. Contains blogs related to the personal projects,technical stuff I am part of.
