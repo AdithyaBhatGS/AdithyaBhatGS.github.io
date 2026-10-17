@@ -100,6 +100,7 @@ Here is a technical overview breaking down what you manage versus what AWS manag
 | --------- | ------------ |
 | Zero Server Management. | Less low-level access (cannot SSH into the server to debug issues). |
 | Good for unpredictable workloads. | |
+
 ---
 
 ## Final Note
