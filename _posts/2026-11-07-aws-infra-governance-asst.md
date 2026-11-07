@@ -12,10 +12,15 @@ mermaid: true
 > **TL;DR:** An engineering deep dive into personal portfolio project: *AWS Infra Governance Assistant* including key capabilities, design choices, limitations and possible enhancements.
 
 ---
+<br>
 
 ![Dashboard](/assets/images/2026-11-07-aws-infra-governance-asst/dashboard.png)
+_Figure 1: AWS Infrastructure Governance Assistant Dashboard._
+{: .text-center }
 
-## The Context & The Problem
+<br>
+
+## Background & Motivation
 
 ### Problem 1
 
@@ -78,10 +83,19 @@ However the project is not only providing the *Drift Detection* capabilities whi
 Without this one might want to write custom scripts, manually go to the stack, click on the detect drift option which can be time consuming as an organization can manage 100s of stacks.
 
 > A sample illustration:
+<br>
 
 ![Account Level Drift Details](/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_1.png)
+_Figure 2: Account Drift Snapshot._
+{: .text-center }
+
+<br>
 
 ![Drift Details Per Stack](/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_2.png)
+_Figure 3: Stack Drift Details._
+{: .text-center }
+
+<br>
 
 ### Problem 2
 
@@ -97,10 +111,19 @@ Without this one might want to write custom scripts, manually go to the stack, c
 The project contains **Drift History** page which provides these capabilities so that one can easily check their infra healhy history.
 
 > A sample illustration:
+<br>
 
 ![Drift History 1](/assets/images/2026-11-07-aws-infra-governance-asst/drift_history_1.png)
+_Figure 3: Drift History._
+{: .text-center }
+
+<br>
 
 ![Drift History 2](/assets/images/2026-11-07-aws-infra-governance-asst/drift_history_2.png)
+_Figure 4: Added, Removed, Changed Drifts._
+{: .text-center }
+
+<br>
 
 ### Problem 3
 
@@ -120,10 +143,12 @@ The project contains **Drift History** page which provides these capabilities so
 
 > A sample illustration:
 
-![Resource Discovery](/assets/images/2026-11-07-aws-infra-governance-asst/resource_discovery.png)
+<br>
 
-Not Finished Yet...
-Hope you find this meaningful,\
-Thank you 🙂...
+![Resource Discovery](/assets/images/2026-11-07-aws-infra-governance-asst/resource_discovery.png)
+_Figure 5: Resource Discovery Dashboard._
+{: .text-center }
+
+<br>
 
 ---
