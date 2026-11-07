@@ -7,7 +7,7 @@ order: 4
 <!-- > Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page. -->
 <!-- {: .prompt-tip } -->
 
-I'm Adithya Bhat GS. I am software engineer focussed on AWS, Cloud Infrastructure, designing custom solutions and architecture on cloud.
+I'm Adithya Bhat GS. I am software engineer focussed on AWS, cloud infrastructure, container orchestration, security and designing custom solutions, architecture on cloud.
 
 I document my engineering logs and technical deep dives here.
 
