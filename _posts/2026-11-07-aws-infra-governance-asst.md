@@ -13,7 +13,7 @@ mermaid: true
 
 ---
 
-![Dashboard]({{ site.baseurl }}/assets/images/2026-11-07-aws-infra-governance-asst/dashboard.png)
+![Dashboard](/assets/images/2026-11-07-aws-infra-governance-asst/dashboard.png)
 
 ## The Context & The Problem
 
@@ -79,9 +79,9 @@ Without this one might want to write custom scripts, manually go to the stack, c
 
 > A sample illustration:
 
-![Account Level Drift Details]({{ site.baseurl }}/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_1.png)
+![Account Level Drift Details](/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_1.png)
 
-![Drift Details Per Stack]({{ site.baseurl }}/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_2.png)
+![Drift Details Per Stack](/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_2.png)
 
 ### Problem 2
 
@@ -98,9 +98,9 @@ The project contains **Drift History** page which provides these capabilities so
 
 > A sample illustration:
 
-![Drift History 1]({{ site.baseurl }}/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_1.png)
+![Drift History 1](/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_1.png)
 
-![Drift History 2]({{ site.baseurl }}/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_2.png)
+![Drift History 2](/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_2.png)
 
 ### Problem 3
 
@@ -120,7 +120,7 @@ The project contains **Drift History** page which provides these capabilities so
 
 > A sample illustration:
 
-![Resource Discovery]({{ site.baseurl }}/assets/images/2026-11-07-aws-infra-governance-asst/resource_discovery.png)
+![Resource Discovery](/assets/images/2026-11-07-aws-infra-governance-asst/resource_discovery.png)
 
 Not Finished Yet...
 Hope you find this meaningful,\
