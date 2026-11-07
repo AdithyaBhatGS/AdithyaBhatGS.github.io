@@ -98,9 +98,9 @@ The project contains **Drift History** page which provides these capabilities so
 
 > A sample illustration:
 
-![Drift History 1](/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_1.png)
+![Drift History 1](/assets/images/2026-11-07-aws-infra-governance-asst/drift_history_1.png)
 
-![Drift History 2](/assets/images/2026-11-07-aws-infra-governance-asst/account_drift_2.png)
+![Drift History 2](/assets/images/2026-11-07-aws-infra-governance-asst/drift_history_2.png)
 
 ### Problem 3
 
