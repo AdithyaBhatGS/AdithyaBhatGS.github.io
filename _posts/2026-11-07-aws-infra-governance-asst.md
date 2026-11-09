@@ -151,4 +151,113 @@ _Figure 5: Resource Discovery Dashboard._
 
 <br>
 
+## Architecture, Design Decisions
+
+![Architecture Diagram](/assets/images/2026-11-07-aws-infra-governance-asst/aws-infra-gov-arch.drawio.png)
+_Figure 6: Platform Architecture._
+{: .text-center }
+
+### 1. OIDC over long term keys
+
+*Open ID Connect* is used for authentication and authorization over traditional *access keys & secret keys*.
+
+No need to store any *creds* in the repo.
+
+No need to manually rotate the *creds*.
+
+*sts* generates short term creds which reduces the *blast radius* in an event of compromise(very rare).
+
+To top that one can enforce granular trust policy by adding which repo, which environment, which event, which branch is allowed to perform the actions specified in the permissions policy.
+
+### 2. High Availability Architecture
+
+1. Multi-AZ
+    - Platform is deployed across 2 *AZ*: *us-east-1a*, *us-east-1b*.
+    - Any issue to one data center will not affect another, providing HA.
+2. HA NAT
+    - 2 NATs are deployed (1 per AZ).
+    - If any of the *AZ* goes down, if any of the NAT faces an issue, servers in another *AZ* can still make outbound calls.
+    - *Eliminates Cross-AZ Data Transfer Fees* which AWS charges for requests made by servers from another *AZ* which would occur if only 1 NAT exist.
+    - *Eliminates Cross-AZ Network Latency* which would happen if there was only 1 NAT Gateway as the packets would travel to another AZ and then to the internet gateway.
+3. ELB
+    - Distributes the traffic across multiple servers across 2 AZ.
+
+4. ASG
+    - Provides auto scaling capabilities across AZ to maintain the performance and traffic spikes.
+
+### 3. Use of `iam:PassRole`
+
+*GitHub Actions* will pass the appropriate role (rather than directly being the executor) to the service: `cloudformation.amazonaws.com`.
+
+This will prevent any attacks that can happen otherwise(broad permissions provided directly to the pipleine itself).
+
+### 4. Hosting the platform in private subnet
+
+Platform is deployed on private subnet.
+
+Inbound : ALB Security Group
+
+Outbound: NAT gateway
+
+This will protect the platform as it is not visible over public network and still can make outbound calls like *pulling an application artifact* from S3 or *storing the drift data* to a DynamoDB table through NAT Gateway.
+
+### 5. Shift-Left Security & Guardrails
+
+Every new PR to infra will go through linting, validation, custom policy checks.
+
+Flow would be:
+
+```mermaid
+---
+title: Shift-Left Security & Guardrails
+---
+flowchart LR
+    lint1[yamllint] --> lint2[cfn-lint] --> validate1[aws cloudformation validate-template] --> pac[checkov]
+```
+
+Custom policies & rationale behind their implementation:
+
+- **Rule01:** Enforces a strict retention period of exactly 30 days for all CloudWatch Log Groups.
+    - **Business & Technical Rationale:**
+        - **Operational Visibility:** 30 days provides an optimal window to debug application errors, system anomalies, or `cloud-init` boot failures.
+        - **FinOps Optimization:** AWS defaults log retention to "Never Expire," leading to silent, compounding storage costs over time. Standardizing on 30 days eliminates dead storage while keeping logs long enough to be shipped to a cold storage data lake if needed for long-term compliance.
+
+- **Rule02:** Restricts block device configurations in Launch Templates to `gp3` only, blocking legacy `gp2` or magnetic volumes.
+    - **Business & Technical Rationale:**
+      - **Cost Efficiency:** `gp3` volumes offer a baseline 20% lower price per GB per month compared to `gp2`.
+      - **Architectural Decoupling:** Unlike `gp2`, where IOPS and throughput are tied directly to the size of the volume (forcing over-provisioning), `gp3` allows us to scale IOPS and throughput independently of storage capacity. Every volume starts with a free baseline of 3,000 IOPS and 125 MB/s.
+
+- **Rule03:** Enforces the presence of four mandatory keys on all taggable resources: `Environment`, `Project`, `Owner`, and `ManagedBy`.
+    - **Business & Technical Rationale:**
+      - **FinOps Accountability:** Essential for accurate cost allocation, budget alerting, and generating granular AWS Cost Explorer reports.
+
+<!-- ### 6. EC2 over ECS, EKS -->
+
+### 7. Consistent server provisioning through **golden images**
+
+The servers are provisioned consistently through pre-approved **golden AMIs**.
+
+Some benfits include:
+
+- Faster boot times during a scale-out event: By baking runtime directly into an image.
+- Higher deployment reliability: No need to check the availability of upstream servers or remote package repos during boot.
+- Elimination of configuration drift: Every EC2 instance spun up from a specific golden AMI ID is bit-for-bit identical. You avoid scenarios where two instances in the same target group end up with slightly different dependency versions because a package updated upstream between launches.
+- Pridictable Rollbacks: If a new deployment introduces a bug, rolling back in AWS simply means updating your EC2 Launch Template to point back to the previous golden AMI ID and triggering an Instance Refresh.
+
+Golden image configurations:
+
+Tool            : HashiCorp Packer
+
+Base AMI        : `al2023-ami-minimal-2023.*-kernel-*-x86_64`
+
+Root Device Type: EBS volumes
+
+Runtime packages:
+
+- aws-cfn-bootstrap
+- amazon-ssm-agent 
+- amazon-cloudwatch-agent
+- python3.13
+- unzip
+
 ---
