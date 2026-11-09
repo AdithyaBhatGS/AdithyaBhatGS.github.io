@@ -313,10 +313,11 @@ Helper scripts comes with *Built-in Error Handling and Logging*. They log detail
 
 ## Final Note
 
-Have mentioned the issues, how to project solves them, architecture design, design decisions, key limitations and possible enhancements in the above *log*.
+Have mentioned the issues, how the project solves them, architecture design, design decisions, key limitations and possible enhancements in the above *log*.
 
-Do check the project ![here](https://github.com/AdithyaBhatGS/aws-infrastructure-governance-assistant).
+Do check the project [here](https://github.com/AdithyaBhatGS/aws-infrastructure-governance-assistant){:target="_blank"}.
 
 Hope you find this meaningful,\
 Thank you 🙂...
+
 ---
