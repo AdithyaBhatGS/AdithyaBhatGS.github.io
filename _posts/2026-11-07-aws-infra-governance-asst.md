@@ -310,4 +310,13 @@ Helper scripts comes with *Built-in Error Handling and Logging*. They log detail
 2. Can dockerize and ship the platform to *AWS ECS* to eliminate the issue of *It runs on my machine*.
 3. Can add https for traffic.
 4. Currently if rollbacks are manual. Means one should change the LT AMI version to previous one. However if needed can add some rollback behaviour.
+
+## Final Note
+
+Have mentioned the issues, how to project solves them, architecture design, design decisions, key limitations and possible enhancements in the above *log*.
+
+Do check the project ![here](https://github.com/AdithyaBhatGS/aws-infrastructure-governance-assistant).
+
+Hope you find this meaningful,\
+Thank you 🙂...
 ---
