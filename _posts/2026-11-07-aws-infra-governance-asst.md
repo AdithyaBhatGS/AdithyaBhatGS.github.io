@@ -231,7 +231,19 @@ Custom policies & rationale behind their implementation:
     - **Business & Technical Rationale:**
       - **FinOps Accountability:** Essential for accurate cost allocation, budget alerting, and generating granular AWS Cost Explorer reports.
 
-<!-- ### 6. EC2 over ECS, EKS -->
+### 6. EC2 over ECS, EKS
+
+Platform hosting options: AWS EC2, AWS ECS, AWS EKS
+
+Choose EC2 over the other 2.
+
+EC2 provides more granular control compared to the other choices.
+
+But then it also adds lot of overhead as you will become responsible for OS security, OS patching, Scaling (with ASG), Maintaining consistent runtimes.
+
+More granular control over OS, the overall application footprint / traffic (low as of now), need for understanding the helper scripts per say `cfn-init`, `cfn-signal` under the hood, curiosity to explore *Golden Images* were few reasons in choosing the *AWS EC2*.
+
+One can absolutely go with *AWS ECS (on EC2)*, *AWS ECS (Fargate)*, *AWS EKS* as per their requirement.
 
 ### 7. Consistent server provisioning through **golden images**
 
@@ -239,25 +251,63 @@ The servers are provisioned consistently through pre-approved **golden AMIs**.
 
 Some benfits include:
 
-- Faster boot times during a scale-out event: By baking runtime directly into an image.
-- Higher deployment reliability: No need to check the availability of upstream servers or remote package repos during boot.
-- Elimination of configuration drift: Every EC2 instance spun up from a specific golden AMI ID is bit-for-bit identical. You avoid scenarios where two instances in the same target group end up with slightly different dependency versions because a package updated upstream between launches.
-- Pridictable Rollbacks: If a new deployment introduces a bug, rolling back in AWS simply means updating your EC2 Launch Template to point back to the previous golden AMI ID and triggering an Instance Refresh.
+- **Faster boot times during a scale-out event:** By baking runtime directly into an image.
+- **Higher deployment reliability:** No need to check the availability of upstream servers or remote package repos during boot.
+- **Elimination of configuration drift:** Every EC2 instance spun up from a specific golden AMI ID is bit-for-bit identical. You avoid scenarios where two instances in the same target group end up with slightly different dependency versions because a package updated upstream between launches.
+- **Predictable Rollbacks:** If a new deployment introduces a bug, rolling back in AWS simply means updating your EC2 Launch Template to point back to the previous golden AMI ID and triggering an Instance Refresh.
 
 Golden image configurations:
 
-Tool            : HashiCorp Packer
+- Tool            : HashiCorp Packer
 
-Base AMI        : `al2023-ami-minimal-2023.*-kernel-*-x86_64`
+- Base AMI        : `al2023-ami-minimal-2023.*-kernel-*-x86_64`
 
-Root Device Type: EBS volumes
+- Root Device Type: EBS volumes
 
-Runtime packages:
+- Runtime packages:
 
-- aws-cfn-bootstrap
-- amazon-ssm-agent 
-- amazon-cloudwatch-agent
-- python3.13
-- unzip
+    - aws-cfn-bootstrap
+    - amazon-ssm-agent 
+    - amazon-cloudwatch-agent
+    - python3.13
+    - unzip
 
+### 8. cfn-init with UserData over putting everything into UserData
+
+Whenever servers are provisioned to host the application workloads, normally certain bash commands are executed through *UserData* or *Ansible* commands are invoked during boot to install packages, configure runtime, security components.
+
+However *bash commands or scripts* are **imperative** in nature.
+
+*cfn-init* provides declarative capabilities through `AWS::CloudFormation::Init` metadata block.
+
+One can easily organize the requirements into `packages`, `files`, `commands`, `services` block.
+
+One can pair this with *Userdata* which also reduces clutter otherwise.
+
+Helper scripts comes with *Built-in Error Handling and Logging*. They log detailed execution steps locally into: `/var/log/cfn-init.log`, `/var/log/cloud-init-output.log`.
+
+### Application composition
+
+- Backend: FastAPI
+
+- Frontend: Streamlit
+
+- Data Validation: Pydantic
+
+- Streamlit: 8501
+
+- FastAPI: 8000 on localhost
+
+- SDK: AWS SDK for Python: Boto3
+
+- App SG Inbound: ASG Security Group on 8501
+
+- App SG Outbound: 0.0.0.0/0 on 443/80 through NAT Gateway
+
+## Limitations, Enhancements
+
+1. Currently the platform does not support *Drift Remediation*.
+2. Can dockerize and ship the platform to *AWS ECS* to eliminate the issue of *It runs on my machine*.
+3. Can add https for traffic.
+4. Currently if rollbacks are manual. Means one should change the LT AMI version to previous one. However if needed can add some rollback behaviour.
 ---
